@@ -3,19 +3,19 @@ const router = express.Router();
 const connection = require('./conn');
 
 router.get('/', function(req, res) {
-  connection.connect((err) => {
-    if(err) {
-      console.log('Error', err);
-    };
+    connection.connect((err) => {
+        if(err) {
+            console.log('Error', err);
+        };
 
-    connection.query('SELECT * FROM users', (err, data) => {
-      if(err) {
-        console.log('Error: ', err);
-      };
+        connection.query('SELECT * FROM users', (err, data) => {
+            if(err) {
+            console.log('Error: ', err);
+            };
 
-      res.json(data);
+            res.json(data);
+        });
     });
-  });
 });
 
 router.post('/login', function(req, res) {
@@ -43,5 +43,6 @@ router.post('/login', function(req, res) {
         };
     });
 });
+
 
 module.exports = router;
