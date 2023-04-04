@@ -59,16 +59,18 @@ function loginUser() {
 }
 
 function printLoggedinStartPage() {
+    document.body.style.display = 'block';
+
     startpage.innerHTML = '';
 
     const logoutBtn = document.createElement('button');
     logoutBtn.innerHTML = 'Log Out';
-    logoutBtn.classname = 'logoutBtn';
+    logoutBtn.className = 'logoutBtn';
 
     userBtnContainer.appendChild(logoutBtn);
 
     let optionContainer = document.createElement('div');
-    optionContainer.className = 'optioncontainer';
+    optionContainer.className = 'optionContainer';
     
     const greeting = document.createElement('p');
     const viewDocumentBtn = document.createElement('button');

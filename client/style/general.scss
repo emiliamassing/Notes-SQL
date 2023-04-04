@@ -44,6 +44,16 @@ h1 {
     text-align: center;
 }
 
+button.logoutBtn {
+    &:hover {
+        background-color: #706ebe;
+        transform: translate(-100%, 0) rotate(10deg);
+        transition: 0.2s transform ease-out;
+        transform: scale(1.05);
+        will-change: transform;
+    }
+}
+
 .startpage {
     .loginForm {
         display: flex;
@@ -87,6 +97,16 @@ h1 {
             }
         }
     }
+
+    .greeting {
+        margin-top: 4em;
+    }
+
+    .optionContainer {
+        button {
+            margin: 10px;
+        }
+    }
 }
 
 button {
@@ -101,7 +121,7 @@ button {
     transition: border-color 0.25s;
 
     &:hover {
-        border-color: #646cff;
+        border-color: #706ebe;
     }
 
     &:focus, &:focus-visible {
