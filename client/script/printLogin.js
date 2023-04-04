@@ -70,14 +70,17 @@ function printLoggedinStartPage() {
     let optionContainer = document.createElement('div');
     optionContainer.className = 'optioncontainer';
     
+    const greeting = document.createElement('p');
     const viewDocumentBtn = document.createElement('button');
     const createDocumentBtn = document.createElement('button');
+    greeting.className = 'greeting';
     viewDocumentBtn.className = 'viewDocumentBtn';
     createDocumentBtn.className = 'createDocumentBtn';
 
+    greeting.innerHTML = 'Welcome!';
     viewDocumentBtn.innerHTML = 'View all documents';
     createDocumentBtn.innerHTML = 'Create a new document';
 
-    optionContainer.append(viewDocumentBtn, createDocumentBtn);
+    optionContainer.append(greeting, viewDocumentBtn, createDocumentBtn);
     startpage.appendChild(optionContainer);
 };
