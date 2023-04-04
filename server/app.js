@@ -12,7 +12,7 @@ const app = express();
 
 connection.connect(function(err) {
     if(err) {
-        console.log('Error', err);
+        console.log('Error: ', err);
     };
 
     console.log('Connected to database');
