@@ -13,9 +13,13 @@ export function printLoginForm() {
 
     userInput.placeholder = 'Username';
     passwordInput.placeholder = 'Password';
+
     userInput.required = true;
     passwordInput.required = true;
+    passwordInput.type = 'password';
 
+    userInput.className = 'userInput';
+    passwordInput.className = 'passwordInput';
 
     form.append(heading, userInput, passwordInput, submitBtn);
 
@@ -23,11 +27,28 @@ export function printLoginForm() {
     root.appendChild(form);
 
     submitBtn.addEventListener('click', e => {
-       // e.preventDefault();
+        e.preventDefault();
         loginUser();
     });
 };
 
 function loginUser() {
-    console.log('Login');
+    const userInput = document.querySelector('.userInput');
+    const passwordInput = document.querySelector('.passwordInput');
+    let userInfo = {username: userInput.value, password: passwordInput.value};
+
+    fetch('http://localhost:3000/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userInfo)
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log('Signed in');
+    })
+    .catch(err => {
+        console.log('Error: ', err);
+    });
 }
