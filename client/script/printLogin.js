@@ -1,4 +1,6 @@
 let root = document.querySelector('.root');
+let startpage = document.querySelector('.startpage');
+let userBtnContainer = document.querySelector('.loginBtns');
 
 export function printLoginForm() {
     let form = document.createElement('form');
@@ -7,6 +9,7 @@ export function printLoginForm() {
     let passwordInput = document.createElement('input');
     let submitBtn = document.createElement('button');
 
+    form.className = 'loginForm';
     heading.innerHTML = 'Login to create new notes';
     submitBtn.innerHTML = 'Login';
     submitBtn.className = 'loginBtn';
@@ -23,8 +26,9 @@ export function printLoginForm() {
 
     form.append(heading, userInput, passwordInput, submitBtn);
 
-    root.innerHTML = '';
-    root.appendChild(form);
+    userBtnContainer.innerHTML = '';
+
+    startpage.appendChild(form);
 
     submitBtn.addEventListener('click', e => {
         e.preventDefault();
@@ -47,8 +51,33 @@ function loginUser() {
     .then(res => res.json())
     .then(data => {
         console.log('Signed in');
+        printLoggedinStartPage();
     })
     .catch(err => {
         console.log('Error: ', err);
     });
 }
+
+function printLoggedinStartPage() {
+    startpage.innerHTML = '';
+
+    const logoutBtn = document.createElement('button');
+    logoutBtn.innerHTML = 'Log Out';
+    logoutBtn.classname = 'logoutBtn';
+
+    userBtnContainer.appendChild(logoutBtn);
+
+    let optionContainer = document.createElement('div');
+    optionContainer.className = 'optioncontainer';
+    
+    const viewDocumentBtn = document.createElement('button');
+    const createDocumentBtn = document.createElement('button');
+    viewDocumentBtn.className = 'viewDocumentBtn';
+    createDocumentBtn.className = 'createDocumentBtn';
+
+    viewDocumentBtn.innerHTML = 'View all documents';
+    createDocumentBtn.innerHTML = 'Create a new document';
+
+    optionContainer.append(viewDocumentBtn, createDocumentBtn);
+    startpage.appendChild(optionContainer);
+};

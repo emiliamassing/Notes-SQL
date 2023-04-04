@@ -1,5 +1,5 @@
 import '../style/general.css'
-import { printLoginForm } from './printLoginForm';
+import { printLoginForm } from './printLogin';
 
 const userBtnContainer = document.querySelector('.loginBtns');
 
