@@ -2,14 +2,16 @@ let root = document.querySelector('.root');
 let startpage = document.querySelector('.startpage');
 let userBtnContainer = document.querySelector('.loginBtns');
 
+let form = document.createElement('form');
+form.className = 'loginForm';
+
 export function printLoginForm() {
-    let form = document.createElement('form');
+    
     let heading = document.createElement('h2');
     let userInput = document.createElement('input');
     let passwordInput = document.createElement('input');
     let submitBtn = document.createElement('button');
 
-    form.className = 'loginForm';
     heading.innerHTML = 'Login to create new notes';
     submitBtn.innerHTML = 'Login';
     submitBtn.className = 'loginBtn';
@@ -50,15 +52,26 @@ function loginUser() {
     })
     .then(res => res.json())
     .then(data => {
-        console.log('Signed in');
-        printLoggedinStartPage();
+        userInput.value = '';
+        passwordInput.value = '';
+
+        if(data[0].username) {
+            printLoggedinStartPage(data);
+            localStorage.setItem('currentlyLoggedIn', JSON.stringify(data[0].username));
+        } else { //Se till att koden går in i else-satsen
+            let errorMessage = document.createElement('p');
+            errorMessage.innerHTML = 'User not found';
+            
+            form.appendChild(errorMessage);
+        };
+
     })
     .catch(err => {
         console.log('Error: ', err);
     });
 }
 
-function printLoggedinStartPage() {
+function printLoggedinStartPage(user) {
     document.body.style.display = 'block';
 
     startpage.innerHTML = '';
@@ -79,10 +92,21 @@ function printLoggedinStartPage() {
     viewDocumentBtn.className = 'viewDocumentBtn';
     createDocumentBtn.className = 'createDocumentBtn';
 
-    greeting.innerHTML = 'Welcome!';
+    greeting.innerHTML = `Welcome, ${user[0].username}!`;
     viewDocumentBtn.innerHTML = 'View all documents';
     createDocumentBtn.innerHTML = 'Create a new document';
 
     optionContainer.append(greeting, viewDocumentBtn, createDocumentBtn);
     startpage.appendChild(optionContainer);
+
+    logoutBtn.addEventListener('click', logoutUser);
+};
+
+function logoutUser() {
+    localStorage.removeItem('currentlyLoggedIn');
+    
+    startpage.innerHTML = '';
+    userBtnContainer.innerHTML = '';
+
+    //Printa ut loginknappen på bra sätt igen
 };
