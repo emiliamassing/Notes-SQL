@@ -1,4 +1,5 @@
-let root = document.querySelector('.root');
+import { printEditor } from "./printDocuments";
+
 let startpage = document.querySelector('.startpage');
 let userBtnContainer = document.querySelector('.loginBtns');
 
@@ -100,6 +101,8 @@ function printLoggedinStartPage(user) {
     startpage.appendChild(optionContainer);
 
     logoutBtn.addEventListener('click', logoutUser);
+
+    createDocumentBtn.addEventListener('click', printEditor);
 };
 
 function logoutUser() {
