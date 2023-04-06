@@ -8,12 +8,12 @@ router.get('/', function(req, res) {
             console.log('Error', err);
         };
 
-        connection.query('SELECT * FROM documents', (err, data) => {
+        connection.query('SELECT * FROM documents', (err, result) => {
             if(err) {
                 console.log('Error: ', err);
             };
 
-            res.send(data);
+            res.send(result);
         });
     });
 });

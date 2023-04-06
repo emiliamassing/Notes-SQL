@@ -8,12 +8,12 @@ router.get('/', function(req, res) {
             console.log('Error', err);
         };
 
-        connection.query('SELECT * FROM users', (err, data) => {
+        connection.query('SELECT * FROM users', (err, result) => {
             if(err) {
                 console.log('Error: ', err);
             };
 
-            res.send(data);
+            res.send(result);
         });
     });
 });
@@ -31,16 +31,16 @@ router.post('/login', function(req, res) {
     
         let sql = `SELECT * FROM users WHERE username = '${login.username}' AND password = '${login.password}'`;
 
-        connection.query(sql, (err, data) => {
+        connection.query(sql, (err, result) => {
             if(err) {
                 console.log('Something went wrong');
             };
 
-            if(data.length === 0) {
+            if(result.length === 0) {
                return res.json({Error: 'User not found'});
             };
 
-            res.json(data);
+            res.json(result);
         });
     });
 });
