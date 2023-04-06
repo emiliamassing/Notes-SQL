@@ -11,3 +11,16 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:3000/documents
+
+###
+
+POST http://localhost:3000/documents/add
+Content-Type: application/json
+
+{
+    "title": "First document",
+    "summary": "Short text",
+    "author": "emilia",
+    "textContent": "Another longer text"
+}

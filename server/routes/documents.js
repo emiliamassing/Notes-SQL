@@ -27,7 +27,22 @@ router.post('/add', function(req, res) {
         let newNote = {
             title: req.body.title,
             summary: req.body.summary,
+            author: req.body.author,
             textContent: req.body.textContent
         };
+
+        let sql = `INSERT INTO documents (title, summary, author, textContent) VALUES('${newNote.title}', '${newNote.summary}', '${newNote.author}', '${newNote.textContent}')`;
+
+        connection.query(sql, (err, result) => {
+            if(err) {
+                console.log('Error: ', err);
+            };
+
+            console.log('New note', result);
+            res.status(200).json(result);
+
+        });
     });
-})
+});
+
+module.exports = router;
