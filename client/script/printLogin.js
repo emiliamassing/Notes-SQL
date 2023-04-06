@@ -72,7 +72,7 @@ function loginUser() {
     });
 }
 
-function printLoggedinStartPage(user) {
+export function printLoggedinStartPage(user) {
     document.body.style.display = 'block';
 
     startpage.innerHTML = '';
@@ -93,7 +93,7 @@ function printLoggedinStartPage(user) {
     viewDocumentBtn.className = 'viewDocumentBtn';
     createDocumentBtn.className = 'createDocumentBtn';
 
-    greeting.innerHTML = `Welcome, ${user[0].username}!`;
+    greeting.innerHTML = `Welcome!`;
     viewDocumentBtn.innerHTML = 'View all documents';
     createDocumentBtn.innerHTML = 'Create a new document';
 

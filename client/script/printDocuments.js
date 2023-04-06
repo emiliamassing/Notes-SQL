@@ -1,12 +1,16 @@
+import { printLoggedinStartPage } from "./printLogin";
+
 let startpage = document.querySelector('.startpage');
+let loginBtns = document.querySelector('.loginBtns');
 let textResult = document.createElement('div');
-let textContent = document.createElement('textarea');
 textResult.className = 'textResult';
 
 
 export function printEditor() {
     startpage.innerHTML = '';
+    textResult.innerHTML = '';
 
+    let textContent = document.createElement('textarea');
     let form = document.createElement('form');
     let titleLabel = document.createElement('label');
     let titleInput = document.createElement('input');
@@ -50,6 +54,8 @@ export function printEditor() {
 };
 
 function printNewDocument() {
+    const textContent = document.querySelector('.textContent'); 
+
     console.log(textContent.value);
 
     textResult.innerHTML = textContent.value;
@@ -78,6 +84,8 @@ function saveNewDocument() {
     .then(res => res.json())
     .then(data => {
         console.log(data);
+        loginBtns.innerHTML = '';
+        printLoggedinStartPage();
     })
     .catch(err => {
         console.log('Error: ', err);
