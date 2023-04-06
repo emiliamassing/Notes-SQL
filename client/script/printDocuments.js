@@ -44,9 +44,9 @@ export function printEditor() {
     previewBtn.innerHTML = 'Show preview';
     submitBtn.innerHTML = 'Save Document';
 
-    let previewHeading = document.createElement('h2');
-    previewHeading.innerHTML = 'Preview of your document';
-    textPreview.appendChild(previewHeading);
+    let heading = document.createElement('h2');
+    heading.innerHTML = 'Preview of your document';
+    textPreview.appendChild(heading);
 
     container.append(form, textPreview);
     buttonContainer.append(previewBtn, submitBtn);
@@ -77,13 +77,26 @@ export function printEditor() {
 };
 
 function previewDocument() {
-    let previewContainer = document.createElement('div');
+    textPreview.innerHTML = '';
 
-    const textContent = document.querySelector('.textContent'); 
+    const titleInput = document.querySelector('.titleInput');
+    const summaryInput = document.querySelector('.summaryInput');
+    const authorInput = document.querySelector('.authorInput');
+    const textContent = document.querySelector('.textContent');
 
-    console.log(textContent.value);
+    let heading = document.createElement('h2');
+    let title = document.createElement('p');
+    let summary = document.createElement('p');
+    let author = document.createElement('p');
+    let text = document.createElement('p');
 
-    textPreview.innerHTML = textContent.value;
+    heading.innerHTML = 'Preview of your document';
+    title.innerHTML = 'Title: ' + titleInput.value;
+    summary.innerHTML = 'Summary: ' + summaryInput.value;
+    author.innerHTML = 'Author: ' + authorInput.value;
+    text.innerHTML = textContent.value;
+
+    textPreview.append(heading, title, summary, author, text);
 };
 
 function saveNewDocument() {
