@@ -2,15 +2,17 @@ import { printLoggedinStartPage } from "./printLogin";
 
 let startpage = document.querySelector('.startpage');
 let loginBtns = document.querySelector('.loginBtns');
-let textResult = document.createElement('div');
-textResult.className = 'textResult';
+let textPreview = document.createElement('div');
+textPreview.className = 'textPreview';
 
 
 export function printEditor() {
     startpage.innerHTML = '';
-    textResult.innerHTML = '';
+    textPreview.innerHTML = '';
 
-    let textContent = document.createElement('textarea');
+    let container = document.createElement('section');
+    container.className = 'editContainer';
+    
     let form = document.createElement('form');
     let titleLabel = document.createElement('label');
     let titleInput = document.createElement('input');
@@ -18,7 +20,7 @@ export function printEditor() {
     let summaryInput = document.createElement('textarea');
     let authorLabel = document.createElement('label');
     let authorInput = document.createElement('input');
-    let submitBtn = document.createElement('button');
+    let textContent = document.createElement('textarea');
 
     titleInput.className = 'titleInput';
     summaryInput.className = 'summaryInput';
@@ -29,10 +31,27 @@ export function printEditor() {
     titleLabel.innerHTML = 'Title';
     summaryLabel.innerHTML = 'Summary';
     authorLabel.innerHTML = 'Author';
+
+    let buttonContainer = document.createElement('div');
+    buttonContainer.className = 'buttonContainerEditMode';
+
+    let previewBtn = document.createElement('button')
+    let submitBtn = document.createElement('button');
+
+    previewBtn.className = 'previewEditorBtn';
+    submitBtn.className = 'submitEditorBtn'
+
+    previewBtn.innerHTML = 'Show preview';
     submitBtn.innerHTML = 'Save Document';
 
-    form.append(titleLabel, titleInput, summaryLabel, summaryInput, authorLabel, authorInput, textContent, submitBtn);
-    startpage.append(form, textResult);
+    let previewHeading = document.createElement('h2');
+    previewHeading.innerHTML = 'Preview of your document';
+    textPreview.appendChild(previewHeading);
+
+    container.append(form, textPreview);
+    buttonContainer.append(previewBtn, submitBtn);
+    form.append(titleLabel, titleInput, summaryLabel, summaryInput, authorLabel, authorInput, textContent, buttonContainer);
+    startpage.append(container);
 
     tinymce.init({
         selector: '.textContent',
@@ -46,19 +65,25 @@ export function printEditor() {
         }
     });
 
+    previewBtn.addEventListener('click', e => {
+        e.preventDefault();
+        previewDocument();
+    });
+
     submitBtn.addEventListener('click', e => {
         e.preventDefault();
-        printNewDocument();
         saveNewDocument();
     });
 };
 
-function printNewDocument() {
+function previewDocument() {
+    let previewContainer = document.createElement('div');
+
     const textContent = document.querySelector('.textContent'); 
 
     console.log(textContent.value);
 
-    textResult.innerHTML = textContent.value;
+    textPreview.innerHTML = textContent.value;
 };
 
 function saveNewDocument() {
