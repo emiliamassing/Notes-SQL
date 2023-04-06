@@ -7,6 +7,7 @@ const connection = require('./routes/conn');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const documentsRouter = require('./routes/documents');
 
 const app = express();
 
@@ -27,5 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/documents', documentsRouter);
 
 module.exports = app;

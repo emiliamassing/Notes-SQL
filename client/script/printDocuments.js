@@ -1,4 +1,7 @@
 let startpage = document.querySelector('.startpage');
+let textResult = document.createElement('div');
+let textContent = document.createElement('textarea');
+textResult.className = 'textResult';
 
 
 export function printEditor() {
@@ -9,27 +12,38 @@ export function printEditor() {
     let titleInput = document.createElement('input');
     let summaryLabel = document.createElement('label');
     let summaryInput = document.createElement('textarea');
-    let textArea = document.createElement('textarea');
+    
     let submitBtn = document.createElement('button');
 
-    textArea.className = 'textContent';
+    textContent.className = 'textContent';
 
     titleLabel.innerHTML = 'Title';
     summaryLabel.innerHTML = 'Summary';
     submitBtn.innerHTML = 'Save Document';
 
-    form.append( titleLabel, titleInput, summaryLabel, summaryInput, textArea, submitBtn);
-    startpage.appendChild(form);
+    form.append( titleLabel, titleInput, summaryLabel, summaryInput, textContent, submitBtn);
+    startpage.append(form, textResult);
 
     tinymce.init({
         selector: '.textContent',
         plugins: 'code',
         toolbar: 'undo redo | forecolor backcolor | stylesselect bold italic | alignleft alignright | code',
 
-        /*setup: function(editor) {
+        setup: function(editor) {
             editor.on('change', function(){
                 editor.save();
             });
-        }*/
+        }
+    });
+
+    submitBtn.addEventListener('click', e => {
+        e.preventDefault();
+        printNewDocument();
     });
 };
+
+function printNewDocument() {
+    console.log(textContent.value);
+
+    textResult.innerHTML = textContent.value;
+}
