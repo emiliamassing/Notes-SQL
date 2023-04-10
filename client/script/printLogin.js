@@ -1,4 +1,5 @@
 import { printEditor } from "./printDocuments";
+import { printDocumentOverview } from "./viewDocuments";
 
 let startpage = document.querySelector('.startpage');
 let userBtnContainer = document.querySelector('.loginBtns');
@@ -102,6 +103,7 @@ export function printLoggedinStartPage(user) {
 
     logoutBtn.addEventListener('click', logoutUser);
 
+    viewDocumentBtn.addEventListener('click', printDocumentOverview);
     createDocumentBtn.addEventListener('click', printEditor);
 };
 
