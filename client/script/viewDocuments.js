@@ -1,3 +1,5 @@
+import { getSpecificDocument } from "./createDocuments";
+
 let startpage = document.querySelector('.startpage');
 let loginBtns = document.querySelector('.loginBtns');
 let viewDocumentContainer = document.createElement('section');
@@ -92,9 +94,13 @@ function viewFullDocument(note) {
     let editBtn = document.createElement('button');
     editBtn.innerHTML = 'Edit document';
     editBtn.className = 'editBtn';
+    editBtn.id = note[0].noteId;
 
     viewDocumentContainer.append(heading, title, summary, author, text);
     startpage.append(viewDocumentContainer, editBtn);
 
     goBackBtn.addEventListener('click', getDocuments);
+    editBtn.addEventListener('click', (e) => {
+        getSpecificDocument(e.currentTarget.id);
+    });
 };
