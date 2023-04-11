@@ -1,8 +1,14 @@
 let startpage = document.querySelector('.startpage');
 let loginBtns = document.querySelector('.loginBtns');
+let viewDocumentContainer = document.createElement('section');
+viewDocumentContainer.className = 'viewDocumentContainer';
 
 export function getDocuments() {
     console.log('Overview of documents');
+
+    if(document.querySelector('.goBackBtn')) {
+        document.querySelector('.goBackBtn').remove();
+    };
 
     startpage.innerHTML = '';
 
@@ -40,13 +46,55 @@ function printDocumentOverview(data) {
         documentCard.append(title, summary, author, button);
         container.appendChild(documentCard);
 
-        button.addEventListener('click', viewFullDocument);
+        button.addEventListener('click', (e) => {
+           getFullDocument(e.target.id);
+        });
     });
 
     startpage.appendChild(container);
 };
 
-function viewFullDocument() {
-    console.log('Full document');
+function getFullDocument(documentId) {
+    startpage.innerHTML = '';
+
+    fetch('http://localhost:3000/documents/' + documentId)
+    .then(res => res.json())
+    .then(data => {
+        viewFullDocument(data);
+        console.log(data);
+    })
+    .catch(err => {
+        console.log('Error: ', err);
+    })
 };
 
+function viewFullDocument(note) {
+    viewDocumentContainer.innerHTML = '';
+
+    let goBackBtn = document.createElement('button');
+    goBackBtn.innerHTML = 'Go back';
+    goBackBtn.className = 'goBackBtn';
+
+    loginBtns.prepend(goBackBtn);
+
+    let heading = document.createElement('h2');
+    let title = document.createElement('p');
+    let summary = document.createElement('p');
+    let author = document.createElement('p');
+    let text = document.createElement('p');
+
+    heading.innerHTML = 'Full version of your document';
+    title.innerHTML = 'Title: ' + note[0].title;
+    summary.innerHTML = 'Summary: ' + note[0].summary;
+    author.innerHTML = 'Author: ' + note[0].author;
+    text.innerHTML = note[0].textContent;
+
+    let editBtn = document.createElement('button');
+    editBtn.innerHTML = 'Edit document';
+    editBtn.className = 'editBtn';
+
+    viewDocumentContainer.append(heading, title, summary, author, text);
+    startpage.append(viewDocumentContainer, editBtn);
+
+    goBackBtn.addEventListener('click', getDocuments);
+};

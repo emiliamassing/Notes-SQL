@@ -183,6 +183,21 @@ button.logoutBtn {
             }
         }
     }
+
+    section.viewDocumentContainer {
+        margin-top: 2em;
+        height: 40.5em;
+        border: 2px solid #eee;
+        border-radius: 7px;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+
+        p {
+            width: 95%;
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
 }
 
 button {

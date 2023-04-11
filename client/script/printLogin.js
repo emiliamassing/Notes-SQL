@@ -1,4 +1,4 @@
-import { printEditor } from "./printDocuments";
+import { printEditor } from "./createDocuments";
 import { getDocuments } from "./viewDocuments";
 
 let startpage = document.querySelector('.startpage');
