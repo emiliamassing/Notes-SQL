@@ -15,6 +15,10 @@ GET http://localhost:3000/documents
 
 ###
 
+GET http://localhost:3000/documents/4
+
+###
+
 POST http://localhost:3000/documents/add
 Content-Type: application/json
 

@@ -13,6 +13,26 @@ router.get('/', function(req, res) {
                 console.log('Error: ', err);
             };
 
+            res.status(200).json(result);
+        });
+    });
+});
+
+router.get('/:id', function(req, res) {
+    connection.connect((err) => {
+        if(err) {
+            console.log('Error', err);
+        };
+
+        let documentId = req.params.id;
+
+        let sql = `SELECT * FROM documents WHERE noteId=${documentId}`;
+
+        connection.query(sql, (err, result) => {
+            if(err) {
+                console.log('Error: ', err);
+            };
+
             res.send(result);
         });
     });

@@ -17,8 +17,6 @@ export function getDocuments() {
     })
 };
 
-//printDocumentOverview
-
 function printDocumentOverview(data) {
 
     let container = document.createElement('section');
@@ -41,7 +39,14 @@ function printDocumentOverview(data) {
 
         documentCard.append(title, summary, author, button);
         container.appendChild(documentCard);
+
+        button.addEventListener('click', viewFullDocument);
     });
 
     startpage.appendChild(container);
 };
+
+function viewFullDocument() {
+    console.log('Full document');
+};
+
