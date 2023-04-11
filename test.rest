@@ -28,3 +28,21 @@ Content-Type: application/json
     "author": "emilia",
     "textContent": "Another longer text"
 }
+
+###
+
+POST http://localhost:3000/documents/edit/3
+Content-Type: application/json
+
+{
+    "title": "Ipsum",
+    "summary": "Curabitur venenatis commodo mi eget tristique.",
+    "author": "Emilia",
+    "textContent": "Curabitur venenatis commodo mi eget tristique. 
+    Aenean pulvinar lacinia dui. Phasellus quis nulla magna. 
+    Nunc blandit vulputate orci. Proin pulvinar velit ex, 
+    id dapibus turpis fringilla nec. Aliquam egestas, 
+    lacus ut fringilla eleifend, nunc nibh ullamcorper erat, 
+    non dignissim lectus massa vitae est. 
+    Etiam auctor facilisis purus quis imperdiet."
+}
