@@ -73,10 +73,15 @@ function loginUser() {
     });
 }
 
-export function printLoggedinStartPage(user) {
+export function printLoggedinStartPage() {
     document.body.style.display = 'block';
 
     startpage.innerHTML = '';
+    userBtnContainer.innerHTML = '';
+
+    if(document.querySelector('.goBackBtn')) {
+        document.querySelector('.goBackBtn').remove();
+    };
 
     const logoutBtn = document.createElement('button');
     logoutBtn.innerHTML = 'Log Out';

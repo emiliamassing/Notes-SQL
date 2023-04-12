@@ -9,6 +9,12 @@ export function printEditor() {
     startpage.innerHTML = '';
     textPreview.innerHTML = '';
 
+    let goBackBtn = document.createElement('button');
+    goBackBtn.innerHTML = 'Go Back';
+    goBackBtn.className = 'goBackBtn';
+
+    loginBtns.prepend(goBackBtn);
+
     let container = document.createElement('section');
     container.className = 'editContainer';
     
@@ -63,6 +69,8 @@ export function printEditor() {
             });
         }
     });
+
+    goBackBtn.addEventListener('click', printLoggedinStartPage);
 
     previewBtn.addEventListener('click', e => {
         e.preventDefault();

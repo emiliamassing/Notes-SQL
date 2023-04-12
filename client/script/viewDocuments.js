@@ -1,4 +1,5 @@
 import { getSpecificDocument } from "./createDocuments";
+import { printLoggedinStartPage } from "./printLogin";
 
 let startpage = document.querySelector('.startpage');
 let loginBtns = document.querySelector('.loginBtns');
@@ -25,9 +26,14 @@ export function getDocuments() {
 };
 
 function printDocumentOverview(data) {
-
     let container = document.createElement('section');
     container.className = 'documentViewerContainer';
+
+    let goBackBtn = document.createElement('button');
+    goBackBtn.innerHTML = 'Go back';
+    goBackBtn.className = 'goBackBtn';
+
+    loginBtns.prepend(goBackBtn);
 
     data.map(note => {
         let documentCard = document.createElement('div');
@@ -53,6 +59,7 @@ function printDocumentOverview(data) {
     });
 
     startpage.appendChild(container);
+    goBackBtn.addEventListener('click', printLoggedinStartPage);
 };
 
 function getFullDocument(documentId) {
@@ -70,6 +77,10 @@ function getFullDocument(documentId) {
 
 function viewFullDocument(note) {
     viewDocumentContainer.innerHTML = '';
+
+    if(document.querySelector('.goBackBtn')) {
+        document.querySelector('.goBackBtn').remove();
+    };
 
     let goBackBtn = document.createElement('button');
     goBackBtn.innerHTML = 'Go back';
