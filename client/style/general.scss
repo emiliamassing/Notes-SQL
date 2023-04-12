@@ -44,6 +44,12 @@ h1 {
     text-align: center;
 }
 
+.loginBtns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 .startpage {
     .loginForm {
         display: flex;
@@ -150,8 +156,18 @@ h1 {
 
             p {
                 width: 95%;
-                text-align: center;
                 margin: 0 auto;
+            }
+    
+            p.centeredText {
+                text-align: center;
+                width: 80%;
+                margin-top: 10px;
+            }
+    
+            div.leftAlignedText {
+                text-align: left;
+                margin-top: 10px;
             }
         }
     }
@@ -165,10 +181,34 @@ h1 {
         overflow-y: scroll;
         scrollbar-width: thin;
 
-        p {
-            width: 95%;
+        p.centeredText {
             text-align: center;
+            margin-top: 10px;
+        }
+
+        div.leftAlignedText {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        p.centeredText, div.leftAlignedText {
+            width: 80%;
             margin: 0 auto;
+        }
+    }
+
+    section.documentViewerContainer {
+        display: flex;
+        flex-wrap: wrap;
+
+        .documentOverviewCard {
+            border-top: 5px solid #706ebe;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            min-height: 20em;
+            width: 25%;
+            margin: 0 auto;
+            margin-top: 2em;
+            padding: 1em;
         }
     }
 }

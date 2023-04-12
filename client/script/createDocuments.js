@@ -95,7 +95,12 @@ function previewDocumentCreated() {
     let title = document.createElement('p');
     let summary = document.createElement('p');
     let author = document.createElement('p');
-    let text = document.createElement('p');
+    let text = document.createElement('div');
+
+    title.className = 'centeredText';
+    summary.className = 'centeredText';
+    author.className = 'centeredText';
+    text.className = 'leftAlignedText';
 
     heading.innerHTML = 'Preview of your document';
     title.innerHTML = 'Title: ' + titleInput.value;
@@ -237,13 +242,18 @@ function previewDocumentEdited() {
     let title = document.createElement('p');
     let summary = document.createElement('p');
     let author = document.createElement('p');
-    let text = document.createElement('p');
+    let text = document.createElement('div');
 
     heading.innerHTML = 'Preview of your document';
     title.innerHTML = 'Title: ' + titleInput.value;
     summary.innerHTML = 'Summary: ' + summaryInput.value;
     author.innerHTML = 'Author: ' + authorInput.value;
     text.innerHTML = textContent.value;
+
+    title.className = 'centeredText';
+    summary.className = 'centeredText';
+    author.className = 'centeredText';
+    text.className = 'leftAlignedText';
 
     textPreview.append(heading, title, summary, author, text);
 };

@@ -50,6 +50,10 @@ function printDocumentOverview(data) {
         author.innerHTML = 'Author: ' + note.author;
         button.innerHTML = 'View full document';
 
+        title.className = 'overviewTitle';
+        summary.className = 'overviewSummary';
+        author.className = 'overviewAuthor';
+
         documentCard.append(title, summary, author, button);
         container.appendChild(documentCard);
 
@@ -92,13 +96,18 @@ function viewFullDocument(note) {
     let title = document.createElement('p');
     let summary = document.createElement('p');
     let author = document.createElement('p');
-    let text = document.createElement('p');
+    let text = document.createElement('div');
 
     heading.innerHTML = 'Full version of your document';
     title.innerHTML = 'Title: ' + note[0].title;
     summary.innerHTML = 'Summary: ' + note[0].summary;
     author.innerHTML = 'Author: ' + note[0].author;
     text.innerHTML = note[0].textContent;
+
+    title.className = 'centeredText';
+    summary.className = 'centeredText';
+    author.className = 'centeredText';
+    text.className = 'leftAlignedText';
 
     let editBtn = document.createElement('button');
     editBtn.innerHTML = 'Edit document';
