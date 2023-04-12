@@ -44,16 +44,6 @@ h1 {
     text-align: center;
 }
 
-button.logoutBtn {
-    &:hover {
-        background-color: #706ebe;
-        transform: translate(-100%, 0) rotate(10deg);
-        transition: 0.2s transform ease-out;
-        transform: scale(1.05);
-        will-change: transform;
-    }
-}
-
 .startpage {
     .loginForm {
         display: flex;
@@ -77,24 +67,6 @@ button.logoutBtn {
             border: 2px solid #797979;
             border-radius: 5px;
             font-family: inherit;
-        }
-
-        button {
-            margin-top: 2em;
-            background-color: unset;
-            border: 2px solid #706ebe;
-            color: #202020;
-            padding-left: 2em;
-            padding-right: 2em;
-            text-transform: uppercase;
-
-            &:hover {
-                background-color: #706ebe;
-                transform: translate(-100%, 0) rotate(10deg);
-                transition: 0.2s transform ease-out;
-                transform: scale(1.05);
-                will-change: transform;
-            }
         }
     }
 
@@ -186,6 +158,7 @@ button.logoutBtn {
 
     section.viewDocumentContainer {
         margin-top: 2em;
+        margin-bottom: 1em;
         height: 40.5em;
         border: 2px solid #eee;
         border-radius: 7px;
@@ -202,21 +175,21 @@ button.logoutBtn {
 
 button {
     border-radius: 8px;
-    border: 1px solid transparent;
+    border: 1px solid rgba(0,0,0,0);
     padding: 0.6em 1.2em;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
     background-color: #1a1a1a;
     cursor: pointer;
-    transition: border-color 0.25s;
+    transition: border-color .25s;
 
     &:hover {
-        border: 2px solid #706ebe;
-    }
-
-    &:focus, &:focus-visible {
-        outline: 4px auto -webkit-focus-ring-color;
+        background-color: #706ebe;
+        transform: translate(-100%, 0) rotate(10deg);
+        transition: 0.2s transform ease-out;
+        transform: scale(1.05);
+        will-change: transform;
     }
 }
 
