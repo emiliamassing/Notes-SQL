@@ -17,7 +17,6 @@ export function getDocuments() {
     fetch('http://localhost:3000/documents')
     .then(res => res.json())
     .then(data => {
-        console.log(data);
         printDocumentOverview(data);
     })
     .catch(err => {
@@ -63,7 +62,6 @@ function getFullDocument(documentId) {
     .then(res => res.json())
     .then(data => {
         viewFullDocument(data);
-        console.log(data);
     })
     .catch(err => {
         console.log('Error: ', err);

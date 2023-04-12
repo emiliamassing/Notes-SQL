@@ -21,11 +21,11 @@ export function printEditor() {
     let authorInput = document.createElement('input');
     let textContent = document.createElement('textarea');
 
-    titleInput.className = 'titleInput';
-    summaryInput.className = 'summaryInput';
+    titleInput.className = 'titleInputCreate';
+    summaryInput.className = 'summaryInputCreate';
     summaryInput.maxLength = '280';
-    authorInput.className = 'authorInput';
-    textContent.className = 'textContent';
+    authorInput.className = 'authorInputCreate';
+    textContent.className = 'textContentCreate';
     
     titleLabel.innerHTML = 'Title';
     summaryLabel.innerHTML = 'Summary';
@@ -53,7 +53,7 @@ export function printEditor() {
     startpage.append(container);
 
     tinymce.init({
-        selector: '.textContent',
+        selector: '.textContentCreate',
         plugins: 'code',
         toolbar: 'undo redo | forecolor backcolor | stylesselect bold italic | alignleft alignright | code',
 
@@ -66,7 +66,7 @@ export function printEditor() {
 
     previewBtn.addEventListener('click', e => {
         e.preventDefault();
-        previewDocument();
+        previewDocumentCreated();
     });
 
     submitBtn.addEventListener('click', e => {
@@ -75,13 +75,13 @@ export function printEditor() {
     });
 };
 
-function previewDocument() {
+function previewDocumentCreated() {
     textPreview.innerHTML = '';
 
-    const titleInput = document.querySelector('.titleInput');
-    const summaryInput = document.querySelector('.summaryInput');
-    const authorInput = document.querySelector('.authorInput');
-    const textContent = document.querySelector('.textContent');
+    const titleInput = document.querySelector('.titleInputCreate');
+    const summaryInput = document.querySelector('.summaryInputCreate');
+    const authorInput = document.querySelector('.authorInputCreate');
+    const textContent = document.querySelector('.textContentCreate');
 
     let heading = document.createElement('h2');
     let title = document.createElement('p');
@@ -99,10 +99,10 @@ function previewDocument() {
 };
 
 function saveNewDocument() {
-    const titleInput = document.querySelector('.titleInput');
-    const summaryInput = document.querySelector('.summaryInput');
-    const authorInput = document.querySelector('.authorInput');
-    const textContent = document.querySelector('.textContent'); 
+    const titleInput = document.querySelector('.titleInputCreate');
+    const summaryInput = document.querySelector('.summaryInputCreate');
+    const authorInput = document.querySelector('.authorInputCreate');
+    const textContent = document.querySelector('.textContentCreate'); 
 
     let newDocument = {
         title: titleInput.value,
@@ -157,11 +157,11 @@ export function printEditorOfExistingDocument(note) {
     let authorInput = document.createElement('input');
     let textContent = document.createElement('textarea');
 
-    titleInput.className = 'titleInput';
-    summaryInput.className = 'summaryInput';
+    titleInput.className = 'titleInputEdit';
+    summaryInput.className = 'summaryInputEdit';
     summaryInput.maxLength = '280';
-    authorInput.className = 'authorInput';
-    textContent.className = 'textContent';
+    authorInput.className = 'authorInputEdit';
+    textContent.className = 'textContentEdit';
 
     titleInput.value = note[0].title;
     summaryInput.value = note[0].summary;
@@ -176,25 +176,26 @@ export function printEditorOfExistingDocument(note) {
     buttonContainer.className = 'buttonContainerEditMode';
 
     let previewBtn = document.createElement('button')
-    let submitBtn = document.createElement('button');
+    let updateBtn = document.createElement('button');
 
     previewBtn.className = 'previewEditorBtn';
-    submitBtn.className = 'submitEditorBtn'
+    updateBtn.className = 'submitEditorBtn';
+    updateBtn.id = note[0].noteId;
 
     previewBtn.innerHTML = 'Show preview';
-    submitBtn.innerHTML = 'Save Document';
+    updateBtn.innerHTML = 'Update Document';
 
     let heading = document.createElement('h2');
     heading.innerHTML = 'Preview of your document';
     textPreview.appendChild(heading);
 
     container.append(form, textPreview);
-    buttonContainer.append(previewBtn, submitBtn);
+    buttonContainer.append(previewBtn, updateBtn);
     form.append(titleLabel, titleInput, summaryLabel, summaryInput, authorLabel, authorInput, textContent, buttonContainer);
     startpage.append(container);
 
     tinymce.init({
-        selector: '.textContent',
+        selector: '.textContentEdit',
         plugins: 'code',
         toolbar: 'undo redo | forecolor backcolor | stylesselect bold italic | alignleft alignright | code',
 
@@ -207,12 +208,63 @@ export function printEditorOfExistingDocument(note) {
 
     previewBtn.addEventListener('click', e => {
         e.preventDefault();
-        previewDocument();
+        previewDocumentEdited();
     });
 
-    submitBtn.addEventListener('click', e => {
+    updateBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        saveNewDocument();
+        updateDocument(e.currentTarget.id);
     });
+};
 
+function previewDocumentEdited() {
+    textPreview.innerHTML = '';
+
+    const titleInput = document.querySelector('.titleInputEdit');
+    const summaryInput = document.querySelector('.summaryInputEdit');
+    const authorInput = document.querySelector('.authorInputEdit');
+    const textContent = document.querySelector('.textContentEdit');
+
+    let heading = document.createElement('h2');
+    let title = document.createElement('p');
+    let summary = document.createElement('p');
+    let author = document.createElement('p');
+    let text = document.createElement('p');
+
+    heading.innerHTML = 'Preview of your document';
+    title.innerHTML = 'Title: ' + titleInput.value;
+    summary.innerHTML = 'Summary: ' + summaryInput.value;
+    author.innerHTML = 'Author: ' + authorInput.value;
+    text.innerHTML = textContent.value;
+
+    textPreview.append(heading, title, summary, author, text);
+};
+
+function updateDocument(noteId) {
+    const titleInput = document.querySelector('.titleInputEdit');
+    const summaryInput = document.querySelector('.summaryInputEdit');
+    const authorInput = document.querySelector('.authorInputEdit');
+    const textContent = document.querySelector('.textContentEdit'); 
+
+    let editedDocument = {
+        title: titleInput.value,
+        summary: summaryInput.value,
+        author: authorInput.value,
+        textContent: textContent.value
+    };
+
+    fetch('http://localhost:3000/documents/edit/' + noteId, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editedDocument)
+    })
+    .then(res => res.json())
+    .then(data => {
+        printLoggedinStartPage();
+    })
+    .catch(err => {
+        console.log('Error: ', err);
+    });
 };
