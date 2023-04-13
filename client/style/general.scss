@@ -1,11 +1,9 @@
+@use 'variables' as var;
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-  
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
   
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -30,6 +28,8 @@ body {
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
+    background-image: var.$bgImage;
+    background-size: cover;
 }
   
 h1 {
@@ -48,6 +48,10 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 10px;
+
+    button {
+        background-color: var.$whiteBgColor;
+    }
 }
 
 .startpage {
@@ -55,7 +59,7 @@ h1 {
         display: flex;
         flex-direction: column;
         align-items: center;
-        border-top: 5px solid #706ebe;
+        border-top: 5px solid var.$purpleColor;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         min-height: 60vh;
         width: 40vw;
@@ -106,6 +110,8 @@ h1 {
     
             label {
                 margin: 0;
+                font-weight: 400;
+                color: var.$blackTextColor;
             }
     
             input {
@@ -134,13 +140,13 @@ h1 {
             .buttonContainerEditMode {
                 button {
                     margin: 0.5em;
-                    color: #202020;
+                    color: var.$blackTextColor;
                     padding-left: 2em;
                     padding-right: 2em;
-                    text-transform: uppercase;
+                    text-transform: capitalize;
         
                     &:hover {
-                        background-color: #706ebe;
+                        background-color: var.$purpleColor;
                         transform: translate(-100%, 0) rotate(10deg);
                         transition: 0.2s transform ease-out;
                         transform: scale(1.05);
@@ -151,6 +157,8 @@ h1 {
         }
 
         .textPreview {
+            background-color: #ffffff;
+            color: var.$blackTextColor;
             margin-left: 3em;
             width: 50%;
             height: 40.5em;
@@ -178,11 +186,14 @@ h1 {
     }
 
     section.viewDocumentContainer {
+        background-color: var.$whiteBgColor;
+        width: 80%;
+        margin: 0 auto;
         margin-top: 2em;
         margin-bottom: 1em;
         height: 40.5em;
         border: 2px solid #eee;
-        border-radius: 7px;
+        border-radius: 9px;
         overflow-y: scroll;
         scrollbar-width: thin;
 
@@ -202,12 +213,17 @@ h1 {
         }
     }
 
+    button.editBtn {
+        background-color: var.$whiteBgColor;
+    }
+
     section.documentViewerContainer {
         display: flex;
         flex-wrap: wrap;
 
         .documentOverviewCard {
-            border-top: 5px solid #706ebe;
+            background-color: var.$whiteBgColor;
+            border-top: 5px solid var.$purpleColor;
             box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
             min-height: 20em;
             width: 25%;
@@ -219,18 +235,19 @@ h1 {
 }
 
 button {
+    background-color: #e1e1e1;
+    color: var.$blackTextColor;
     border-radius: 8px;
     border: 1px solid rgba(0,0,0,0);
     padding: 0.6em 1.2em;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #1a1a1a;
     cursor: pointer;
     transition: border-color .25s;
 
     &:hover {
-        background-color: #706ebe;
+        background-color: var.$purpleColor;
         transform: translate(-100%, 0) rotate(10deg);
         transition: 0.2s transform ease-out;
         transform: scale(1.05);
@@ -240,16 +257,12 @@ button {
 
 @media (prefers-color-scheme: light) {
     :root {
-        color: #373737;
+        color: var.$blackTextColor;
         background-color: #ffffff;
     }
 
     a:hover {
         color: #747bff;
-    }
-
-    button {
-        background-color: #e4e4e4;
     }
 }
   
