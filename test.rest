@@ -23,10 +23,10 @@ POST http://localhost:3000/documents/add
 Content-Type: application/json
 
 {
-    "title": "First document",
-    "summary": "Short text",
-    "author": "emilia",
-    "textContent": "Another longer text"
+    "title": "Test",
+    "summary": "As the politics and rivalries of the seven human nations waxed and waned, the line of Guardians kept its constant vigil against chaos.",
+    "author": "Emilia",
+    "textContent": "There were many Guardians over the years, but only one ever held the magical powers of Tirisfal at any given time."
 }
 
 ###

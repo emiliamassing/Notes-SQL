@@ -44,14 +44,12 @@ router.post('/add', function(req, res) {
             console.log('Error: ', err);
         };
 
-        let newNote = {
-            title: req.body.title,
-            summary: req.body.summary,
-            author: req.body.author,
-            textContent: req.body.textContent
-        };
+        let escTitle = connection.escape(req.body.title);
+        let escSummary = connection.escape(req.body.summary);
+        let escAuthor = connection.escape(req.body.author);
+        let escTextContent = connection.escape(req.body.textContent);
 
-        let sql = `INSERT INTO documents (title, summary, author, textContent) VALUES('${newNote.title}', '${newNote.summary}', '${newNote.author}', '${newNote.textContent}')`;
+        let sql = `INSERT INTO documents (title, summary, author, textContent) VALUES(${escTitle}, ${escSummary}, ${escAuthor}, ${escTextContent})`;
 
         connection.query(sql, (err, result) => {
             if(err) {
@@ -71,16 +69,14 @@ router.post('/edit/:id', function(req, res) {
             console.log('Error: ', err);
         };
 
-        let editedNote = {
-            title: req.body.title,
-            summary: req.body.summary,
-            author: req.body.author,
-            textContent: req.body.textContent
-        };
+        let escTitle = connection.escape(req.body.title);
+        let escSummary = connection.escape(req.body.summary);
+        let escAuthor = connection.escape(req.body.author);
+        let escTextContent = connection.escape(req.body.textContent);
 
         let documentId = req.params.id;
 
-        let sql = `UPDATE documents SET title ='${editedNote.title}', summary ='${editedNote.summary}', author ='${editedNote.author}', textContent ='${editedNote.textContent}' WHERE noteId = ${documentId}`;
+        let sql = `UPDATE documents SET title =${escTitle}, summary =${escSummary}, author =${escAuthor}, textContent =${escTextContent} WHERE noteId = ${documentId}`;
 
         connection.query(sql, (err, result) => {
             if(err) {
