@@ -64,7 +64,7 @@ function loginUser() {
         if(data[0].username) {
             printLoggedinStartPage(data);
             localStorage.setItem('currentlyLoggedIn', JSON.stringify(data[0].username));
-        } else { 
+        }else { 
             let errorMessage = document.createElement('p');
             errorMessage.innerHTML = 'User not found';
             

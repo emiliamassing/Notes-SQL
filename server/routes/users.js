@@ -37,7 +37,7 @@ router.post('/login', function(req, res) {
             };
 
             if(result.length === 0) {
-               return res.json({Error: 'User not found'});
+               return res.status(400).json({Error: 'User not found'});
             };
 
             res.json(result);
