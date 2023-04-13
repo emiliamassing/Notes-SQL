@@ -242,7 +242,7 @@ function previewDocumentEdited() {
     let title = document.createElement('p');
     let summary = document.createElement('p');
     let author = document.createElement('p');
-    let text = document.createElement('div');
+    let text = document.createElement('p');
 
     heading.innerHTML = 'Preview of your document';
     title.innerHTML = 'Title: ' + titleInput.value;
