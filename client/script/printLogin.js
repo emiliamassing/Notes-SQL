@@ -1,13 +1,16 @@
 import { printEditor } from "./createDocuments";
+import { printLoginBtn } from "./main";
 import { getDocuments } from "./viewDocuments";
 
 let startpage = document.querySelector('.startpage');
 let userBtnContainer = document.querySelector('.loginBtns');
 
-let form = document.createElement('form');
-form.className = 'loginForm';
-
 export function printLoginForm() {
+    document.body.style.display = 'flex';
+    startpage.innerHTML = '';
+
+    let form = document.createElement('form');
+    form.className = 'loginForm';
     
     let heading = document.createElement('h2');
     let userInput = document.createElement('input');
@@ -43,6 +46,7 @@ export function printLoginForm() {
 function loginUser() {
     const userInput = document.querySelector('.userInput');
     const passwordInput = document.querySelector('.passwordInput');
+    const form = document.querySelector('loginForm');
     let userInfo = {username: userInput.value, password: passwordInput.value};
 
     fetch('http://localhost:3000/users/login', {
@@ -60,7 +64,7 @@ function loginUser() {
         if(data[0].username) {
             printLoggedinStartPage(data);
             localStorage.setItem('currentlyLoggedIn', JSON.stringify(data[0].username));
-        } else { //Se till att koden går in i else-satsen
+        } else { 
             let errorMessage = document.createElement('p');
             errorMessage.innerHTML = 'User not found';
             
@@ -118,5 +122,5 @@ function logoutUser() {
     startpage.innerHTML = '';
     userBtnContainer.innerHTML = '';
 
-    //Printa ut loginknappen på bra sätt igen
-};
+    printLoginBtn();
+}; 
