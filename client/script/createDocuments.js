@@ -58,6 +58,8 @@ export function printEditor() {
     form.append(titleLabel, titleInput, summaryLabel, summaryInput, authorLabel, authorInput, textContent, buttonContainer);
     startpage.append(container);
 
+    console.log(textContent);
+
     tinymce.init({
         selector: '.textContentCreate',
         plugins: 'code',
